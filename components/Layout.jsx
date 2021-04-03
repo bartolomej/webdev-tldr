@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
-import {FaCode} from "react-icons/all";
+import {FaCode} from "react-icons/fa";
 
 
 function Layout({ children }) {

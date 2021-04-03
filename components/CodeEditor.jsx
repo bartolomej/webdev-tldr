@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from "react";
 import AceEditor from "react-ace";
 import styled from 'styled-components'
-import {AiOutlineFullscreen, AiOutlineFullscreenExit} from "react-icons/all";
+import {AiOutlineFullscreen, AiOutlineFullscreenExit} from "react-icons/ai";
 
 import "ace-builds/src-noconflict/mode-jsx";
 import "ace-builds/src-min-noconflict/ext-searchbox";
