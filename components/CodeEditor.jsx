@@ -27,6 +27,20 @@ function CodeEditor({ open = true, zIndex = 100, onToggle = () => null, code = '
   }, [fullscreen])
 
   useEffect(() => {
+    window.addEventListener("keydown", onKeyPress);
+    return () => window.removeEventListener("keydown", onKeyPress)
+  }, [])
+
+  function onKeyPress(e) {
+    if (e.key === "Escape") {
+      setFullscreen(false)
+      if (open) {
+        onToggle(false)
+      }
+    }
+  }
+
+  useEffect(() => {
     if (iframeRef.current) {
       const iframeDoc = iframeRef.current.contentDocument;
       iframeDoc.open();
@@ -59,7 +73,6 @@ function CodeEditor({ open = true, zIndex = 100, onToggle = () => null, code = '
           <AceEditor
             mode={lang}
             theme={theme}
-            name="UNIQUE_ID_OF_DIV"
             fontSize={16}
             height="100%"
             width="unset"
@@ -68,7 +81,7 @@ function CodeEditor({ open = true, zIndex = 100, onToggle = () => null, code = '
             onBlur={() => setFocused(false)}
             onChange={setValue}
             value={value}
-            showGutter={false}
+            showGutter={isFullscreen}
             setOptions={{
               useWorker: false,
               displayIndentGuides: true,
@@ -89,7 +102,7 @@ function CodeEditor({ open = true, zIndex = 100, onToggle = () => null, code = '
 
 const OuterContainer = styled.div`
   z-index: ${({zIndex}) => zIndex};
-  display: ${({isOpen}) => isOpen ? `unset` : 'none'};
+  display: ${({isOpen}) => isOpen ? `block` : 'none'};
   ${({fullscreen}) => fullscreen ? `position: fixed; top: 0; bottom: 0; left: 0; right: 0;` : ''}
 `;
 

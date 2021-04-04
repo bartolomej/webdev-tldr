@@ -13,3 +13,9 @@ export const Background = styled.div`
   opacity: 0.4;
   background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #e5e5f7 29px ), repeating-linear-gradient( #444cf755, #444cf7 );
 `;
+
+export const Main = styled.main`
+  h2 {
+    color: ${({color}) => color} !important;
+  }
+`;

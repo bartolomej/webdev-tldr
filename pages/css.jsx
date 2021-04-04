@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Background } from "../styles/shared";
+import { Background, Main } from "../styles/shared";
 import Header from "../components/Header";
 import { FaCss3Alt } from "react-icons/fa";
 import dynamic from "next/dynamic";
@@ -117,11 +117,11 @@ function Css() {
         <title>WebDev TLDR; - CSS</title>
       </Head>
       <Background opacity={0.1} />
-      <Header>
+      <Header backgroundColor="#2862e9">
         <h1>CSS <FaCss3Alt /> </h1>
         <p><span data-tip="...ali Cascading Style Sheets na dolgo">Css</span> je t.i. "stilni jezik", saj lahki njegovo pomocjo html elementom dolocimo vizualne stile.</p>
       </Header>
-      <main>
+      <Main color="#2862e9">
         <section>
           <h2>Izbiranje elementov</h2>
           <details>
@@ -191,7 +191,7 @@ function Css() {
             </div>
           </details>
         </section>
-      </main>
+      </Main>
     </Fragment>
   )
 }

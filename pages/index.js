@@ -38,6 +38,9 @@ const MainWrapper = styled.main`
 `
 
 const Header = styled.header`
+  h1 {
+    font-size: 3rem;
+  }
   & * {
     text-align: left;
   }

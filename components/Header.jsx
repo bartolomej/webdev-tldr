@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from "styled-components";
 
-function Header({ children }) {
+function Header({ children, backgroundColor }) {
 
   return (
-    <Container>
+    <Container background={backgroundColor}>
       <InnerWrapper>
         {children}
       </InnerWrapper>
@@ -18,14 +18,14 @@ const Container = styled.header`
   min-height: 30vh;
   display: flex;
   overflow: auto;
-  background: ${({theme}) => theme.colors.dark};
+  background: ${({background, theme}) => background || theme.colors.primary};
   
   h1,p {
     color: ${({theme}) => theme.colors.light};
   }
 
   h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,6 +34,8 @@ const Container = styled.header`
   p {
     font-size: 1.2rem;
     line-height: 1.6rem;
+    max-width: 600px;
+    text-align: center;
   }
 
   @media (max-width: 700px) {

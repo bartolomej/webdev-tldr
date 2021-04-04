@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import dynamic from "next/dynamic";
-import { Background } from "../styles/shared";
+import { Background, Main } from "../styles/shared";
 import Header from "../components/Header";
 import { FaHtml5 } from 'react-icons/fa';
 import HtmlInfoTable from "../components/HtmlInfoTable";
@@ -56,11 +56,11 @@ function Html() {
         <title>WebDev TLDR; - HTML</title>
       </Head>
       <Background opacity={0.1} />
-      <Header>
+      <Header backgroundColor="#e96228">
         <h1>HTML <FaHtml5 /> </h1>
         <p><span data-tip="...ali Hyper Text Markup Language na dolgo">Html</span> je t.i. <span data-tip={`po anglesko "markup language"`}>"oznacevalni jezik"</span>, saj z njim opisujemo strukturo (zgradbo) dokumenta (najveckrat je to spletna stran).</p>
       </Header>
-      <main>
+      <Main color="#e96228">
         <section>
           <p>Html <span data-tip="...oziroma njegova koda">dokument</span> je sestavljen iz <span data-tip="...katere imenujemo tudi 'elementi'">znack</span> in njihovih <span data-tip="...z domaco besedo 'lastnosti'">atributov</span>, s katerimi opisemo vsebino na nasi spletni strani. Obstajajo znacke za prikaz, medijskih vsebin (<code>img</code>, video, audio,...), teksta (h1, p, span, b,..) in raznih drugih vsebin. </p>
           <p>Z atributi opisemo dodatne lastnosti nasih html elementov, na primer njihovo velikost (npr.: <code>width="10"</code>), razred (npr.: <code>class="rdeci-tekst"</code>), identifikator (npr.: <code>id="glavni-naslov"</code>), izvor (<code>src="https://spletna-stran.com/slika.png"</code>), itd..</p>
@@ -170,7 +170,7 @@ function Html() {
             </div>
           </details>
         </section>
-    </main>
+    </Main>
     </Fragment>
   )
 }

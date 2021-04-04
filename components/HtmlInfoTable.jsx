@@ -12,28 +12,30 @@ function HtmlInfoTable({ attributes = [], isTwoPart = false, tag }) {
 
   return (
     <Container>
-      <tr>
-        <td className="title">Atributi</td>
-        <td>
-          {allAttributes.map((e, i) => (
-            <Fragment>
-              <i data-tip={e.about}>{e.name}</i>
-              {i !== allAttributes.length - 1 ? ', ' : ''}
-            </Fragment>
-          ))}
-        </td>
-      </tr>
-      <tr>
-        <td className="title">Dvodelna</td>
-        <td>{isTwoPart ? 'DA' : 'NE'}</td>
-      </tr>
-      <tr>
-        <td className="title">Viri</td>
-        <td>
-          <a target="_blank" href={`https://www.w3schools.com/tags/tag_${tag}.asp`}>w3schools</a>, {' '}
-          <a target="_blank" href={`https://developer.mozilla.org/en-US/docs/Web/HTML/Element/${tag}`}>mozilla</a>
-        </td>
-      </tr>
+      <tbody>
+        <tr>
+          <td className="title">Atributi</td>
+          <td>
+            {allAttributes.map((e, i) => (
+              <Fragment key={i}>
+                <i data-tip={e.about}>{e.name}</i>
+                {i !== allAttributes.length - 1 ? ', ' : ''}
+              </Fragment>
+            ))}
+          </td>
+        </tr>
+        <tr>
+          <td className="title">Dvodelna</td>
+          <td>{isTwoPart ? 'DA' : 'NE'}</td>
+        </tr>
+        <tr>
+          <td className="title">Viri</td>
+          <td>
+            <a target="_blank" href={`https://www.w3schools.com/tags/tag_${tag}.asp`}>w3schools</a>, {' '}
+            <a target="_blank" href={`https://developer.mozilla.org/en-US/docs/Web/HTML/Element/${tag}`}>mozilla</a>
+          </td>
+        </tr>
+      </tbody>
     </Container>
   )
 }

@@ -39,12 +39,16 @@ export default createGlobalStyle`
     }
   }
 
-  h1, h2, p {
+  h1, h2 {
+    color: ${({ theme }) => theme.colors.primary};
+  }
+  
+  h3, h4, h5, h6, p {
     color: ${({ theme }) => theme.colors.dark};
   }
 
   p {
-    line-height: 1.4rem;
+    line-height: 1.8rem;
   }
 
   button {
@@ -65,6 +69,8 @@ export default createGlobalStyle`
       outline: none;
       cursor: pointer;
       user-select: none;
+      font-weight: bold;
+      font-size: 1.1rem;
     }
 
     & > div {
@@ -79,9 +85,9 @@ export default createGlobalStyle`
   code {
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
     font-size: 12px;
-    padding: 3px;
+    padding: 3px 5px;
     border-radius: ${({ theme }) => theme.constants.smBorderRadius};
-    background: ${({ theme }) => theme.colors.dark};
+    background: ${({ theme }) => theme.colors.lightDark};
     color: ${({ theme }) => theme.colors.light};
   }
 
