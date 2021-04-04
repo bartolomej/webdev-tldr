@@ -36,8 +36,8 @@ function CodeEditor({ open = true, zIndex = 100, onToggle = () => null, code = '
   }, [value])
 
   return (
-    <OuterContainer isOpen={open} fullscreen={isFullscreen}>
-      <Container zIndex={isFullscreen ? 1000 : zIndex} focused={isFocused} style={{ height: isFullscreen ? '100%' : height, width }}>
+    <OuterContainer zIndex={isFullscreen ? 1000 : zIndex} isOpen={open} fullscreen={isFullscreen}>
+      <Container focused={isFocused} style={{ height: isFullscreen ? '100%' : height, width }}>
         <ControlsWrapper>
           {isFullscreen ? (
             <ControlButton onClick={() => {
@@ -88,12 +88,12 @@ function CodeEditor({ open = true, zIndex = 100, onToggle = () => null, code = '
 }
 
 const OuterContainer = styled.div`
+  z-index: ${({zIndex}) => zIndex};
   display: ${({isOpen}) => isOpen ? `unset` : 'none'};
   ${({fullscreen}) => fullscreen ? `position: fixed; top: 0; bottom: 0; left: 0; right: 0;` : ''}
 `;
 
 const Container = styled.div`
-  z-index: ${({zIndex}) => zIndex};
   width: 100%;
   position: relative;
   display: flex;
