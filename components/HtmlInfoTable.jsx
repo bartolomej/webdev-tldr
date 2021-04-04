@@ -39,7 +39,8 @@ function HtmlInfoTable({ attributes = [], isTwoPart = false, tag }) {
 }
 
 const Container = styled.table`
-  margin-bottom: 15px;
+  margin-top: 20px;
+  margin-bottom: 30px;
 `;
 
 export default HtmlInfoTable;

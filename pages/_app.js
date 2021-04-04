@@ -26,7 +26,7 @@ const GlobalStyle = createGlobalStyle`
   }
   
   section {
-    margin-bottom: 50px;
+    margin-bottom: 60px;
   }
 
   table {
@@ -60,6 +60,10 @@ const GlobalStyle = createGlobalStyle`
 
   details {
     padding: 10px;
+    
+    &[open] {
+      padding-bottom: 50px;
+    }
 
     summary {
       outline: none;
