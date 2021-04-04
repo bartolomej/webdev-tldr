@@ -55,6 +55,56 @@ const classSelectorExample =
 </style>
 `
 
+const colorCommandsExample =
+`<h1>Glavni naslov</h1>
+<p>Prvi odstavek <span>tega</span> dokumenta.</p>
+
+<style>
+    h1 {
+        background: black;
+        color: white;
+    }
+    span {
+        background-color: gold;
+    }
+</style>
+`;
+
+const boxModelExample =
+  `<div id="kvadrat">
+    Ne dotikam se robov
+</div>
+
+<style>
+    #kvadrat {
+        /* obarvajmo ozadje, da vidimo do kje seze notranjost */
+        background: gold;
+        /* dodajmo notranji odmik 10px */
+        padding: 10px;
+        /* dodajmo zunanji odmik 15px */
+        margin: 15px;
+        /* dodajmo rob sirine 2px */
+        border: 2px solid red;
+    }
+</style>
+`;
+
+const fontCommandsExample =
+  `<h1>Glavni naslov</h1>
+<p>Prvi odstavek <span>tega</span> dokumenta.</p>
+
+<style>
+    h1 {
+        font-family: "Roboto Light", monospace;
+    }
+    p {
+        font-size: 40px;
+    }
+    span {
+        font-size: 10px;
+    }
+</style>
+`;
 
 function Css() {
   const CodeEditor = dynamic(() => import("../components/CodeEditor"), {ssr: false})
@@ -103,6 +153,37 @@ function Css() {
             </summary>
             <div>
               <CodeEditor code={classSelectorExample} height={'300px'}/>
+            </div>
+          </details>
+        </section>
+
+        <section>
+          <h2>Osnovni css ukazi</h2>
+
+          <details>
+            <summary>
+              Spreminjanje barv
+            </summary>
+            <div>
+              <CodeEditor code={colorCommandsExample} height={'300px'}/>
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              Dodajanje vmesnega prostora
+            </summary>
+            <div>
+              <CodeEditor code={boxModelExample} height={'300px'}/>
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              Tekstovni stili
+            </summary>
+            <div>
+              <CodeEditor code={fontCommandsExample} height={'300px'}/>
             </div>
           </details>
         </section>

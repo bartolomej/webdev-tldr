@@ -95,7 +95,6 @@ const OuterContainer = styled.div`
 const Container = styled.div`
   z-index: ${({zIndex}) => zIndex};
   width: 100%;
-  padding: 5px;
   position: relative;
   display: flex;
   flex-direction: row;
