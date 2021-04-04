@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import LangCard from "../components/LangCard";
 import styled from "styled-components";
 import { FaHtml5, FaCss3Alt } from 'react-icons/fa';
-import { Background } from "../components/ui";
+import { Background } from "../styles/shared";
 import Head from "next/head";
 
 export default function Home() {

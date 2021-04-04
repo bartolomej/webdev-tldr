@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Background } from "../components/ui";
+import { Background } from "../styles/shared";
 import Header from "../components/Header";
 import { FaCss3Alt } from "react-icons/fa";
 import dynamic from "next/dynamic";

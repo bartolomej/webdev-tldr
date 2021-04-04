@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import dynamic from "next/dynamic";
-import { Background } from "../components/ui";
+import { Background } from "../styles/shared";
 import Header from "../components/Header";
 import { FaHtml5 } from 'react-icons/fa';
 import HtmlInfoTable from "../components/HtmlInfoTable";

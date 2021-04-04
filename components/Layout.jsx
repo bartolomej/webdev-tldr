@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import {FaCode, FaArrowLeft} from "react-icons/fa";
-import { theme } from "../theme";
+import { theme } from "../styles/theme";
 import { useRouter } from "next/router";
 
 
