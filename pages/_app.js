@@ -7,15 +7,22 @@ import { theme } from "../theme";
 
 const GlobalStyle = createGlobalStyle`
   
+  * {
+    box-sizing: border-box;
+  }
+  
   body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
   }
 
   main {
     max-width: ${({ theme }) => theme.constants.containerWidth};
     margin: auto;
+    @media (max-width: 700px) {
+      width: 100%;
+      padding: 0 20px;
+    }
   }
   
   section {

@@ -31,6 +31,10 @@ const MainWrapper = styled.main`
   display: flex;
   align-items: center;
   height: 100vh;
+  @media (max-width: 700px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 `
 
 const Header = styled.header`
