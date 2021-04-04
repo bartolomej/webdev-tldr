@@ -3,6 +3,7 @@ import { Background } from "../components/ui";
 import Header from "../components/Header";
 import { FaCss3Alt } from "react-icons/fa";
 import dynamic from "next/dynamic";
+import Head from "next/head";
 
 const tagNameSelectorExample =
 `<h1>Naslov 1</h1>
@@ -112,6 +113,9 @@ function Css() {
 
   return (
     <Fragment>
+      <Head>
+        <title>WebDev TLDR; - CSS</title>
+      </Head>
       <Background opacity={0.1} />
       <Header>
         <h1>CSS <FaCss3Alt /> </h1>

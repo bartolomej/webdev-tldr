@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import dynamic from "next/dynamic";
 import "../font.css"
@@ -87,7 +87,7 @@ const GlobalStyle = createGlobalStyle`
 export default function App({ Component, pageProps }) {
   const ReactTooltip = dynamic(() => import("react-tooltip"), {ssr: false})
   return (
-    <>
+    <Fragment>
       <ThemeProvider theme={theme}>
         <ReactTooltip />
         <GlobalStyle />
@@ -95,6 +95,6 @@ export default function App({ Component, pageProps }) {
           <Component {...pageProps} />
         </Layout>
       </ThemeProvider>
-    </>
+    </Fragment>
   )
 }

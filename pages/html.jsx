@@ -4,6 +4,7 @@ import { Background } from "../components/ui";
 import Header from "../components/Header";
 import { FaHtml5 } from 'react-icons/fa';
 import HtmlInfoTable from "../components/HtmlInfoTable";
+import Head from "next/head";
 
 const imgExample =
 `<img 
@@ -51,6 +52,9 @@ function Html() {
 
   return (
     <Fragment>
+      <Head>
+        <title>WebDev TLDR; - HTML</title>
+      </Head>
       <Background opacity={0.1} />
       <Header>
         <h1>HTML <FaHtml5 /> </h1>

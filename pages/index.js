@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import LangCard from "../components/LangCard";
 import styled from "styled-components";
 import { FaHtml5, FaCss3Alt } from 'react-icons/fa';
 import { Background } from "../components/ui";
+import Head from "next/head";
 
 export default function Home() {
 
   return (
-    <>
+    <Fragment>
+      <Head>
+        <title>WebDev TLDR;</title>
+      </Head>
       <Background />
       <MainWrapper>
         <Header>
@@ -19,7 +23,7 @@ export default function Home() {
           <LangCard href="/css" title="CSS" icon={<FaCss3Alt color={'#2862e9'}/>}/>
         </CardWrapper>
       </MainWrapper>
-  </>
+  </Fragment>
   )
 }
 

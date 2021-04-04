@@ -6,20 +6,20 @@ import { theme } from "../theme";
 import { useRouter } from "next/router";
 
 
-function Layout({ children }) {
+function Layout ({ children }) {
   const router = useRouter();
   const [isEditorOpen, setEditorOpen] = useState(false)
-  const CodeEditor = dynamic(() => import("../components/CodeEditor"), {ssr: false})
+  const CodeEditor = dynamic(() => import("../components/CodeEditor"), { ssr: false })
 
   return (
     <Fragment>
       <GoBackButton onClick={() => router.back()}>
-        <FaArrowLeft color={theme.colors.light} size={20} />
+        <FaArrowLeft color={theme.colors.light} size={20}/>
       </GoBackButton>
       <OpenCodeButton onClick={() => setEditorOpen(true)}>
-        <FaCode color={theme.colors.light} size={20} />
+        <FaCode color={theme.colors.light} size={20}/>
       </OpenCodeButton>
-      <CodeEditor zIndex={200} open={isEditorOpen} fullscreen onToggle={() => setEditorOpen(false)} />
+      <CodeEditor zIndex={200} open={isEditorOpen} fullscreen onToggle={() => setEditorOpen(false)}/>
       {children}
     </Fragment>
   )
