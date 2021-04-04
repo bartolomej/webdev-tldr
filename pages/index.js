@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import LangCard from "../components/LangCard";
 import styled from "styled-components";
 import { FaHtml5, FaCss3Alt } from 'react-icons/fa';

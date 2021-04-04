@@ -1,7 +1,9 @@
-import React from "react";
-import styled from "styled-components";
+import React, { Fragment } from "react";
 import dynamic from "next/dynamic";
 import { Background } from "../components/ui";
+import Header from "../components/Header";
+import { FaHtml5 } from 'react-icons/fa';
+import HtmlInfoTable from "../components/HtmlInfoTable";
 
 const imgExample =
 `<img 
@@ -20,27 +22,58 @@ const linkExample =
 </a>
 `
 
+const classExample =
+`<h1 class="rdeca">Naslov</h1>
+<p class="rdeca">Odstavek 1</p>
+<p>Odstavek 2</p>
+
+<style>
+.rdeca {
+    color: red;
+}
+</style>
+`;
+
+const idExample =
+  `<h1 id="glavni-naslov">Naslov</h1>
+<p>Odstavek 1</p>
+
+<style>
+#glavni-naslov {
+    color: green;
+}
+</style>
+`;
+
 function Html() {
   const CodeEditor = dynamic(() => import("../components/CodeEditor"), {ssr: false})
   const editorHeight = "200px"
 
   return (
-    <>
+    <Fragment>
       <Background opacity={0.1} />
-      <main>
-      <header>
-        <h1>HTML</h1>
+      <Header>
+        <h1>HTML <FaHtml5 /> </h1>
         <p><span data-tip="...ali Hyper Text Markup Language na dolgo">Html</span> je t.i. <span data-tip={`po anglesko "markup language"`}>"oznacevalni jezik"</span>, saj z njim opisujemo strukturo (zgradbo) dokumenta (najveckrat je to spletna stran).</p>
-        <p>Html dokument (beri "koda") je sestavljen iz znack  (ali elementov) in njihovih atributov, s katerimi opisemo vsebino na nasi spletni strani. Obstajajo znacke za prikaz, medijskih vsebin (<code>img</code>, video, audio,...), teksta (h1, p, span, b,..) in raznih drugih vsebin. Z atributi opisemo dodatne lastnosti nasih html elementov, na primer njihovo velikost (npr.: width="10"), razred (npr.: class="rdeci-tekst"), identifikator (npr.: id="glavni-naslov"), izvor (src="https://spletna-stran.com/slika.png"), itd..</p>
-      </header>
-      <section>
+      </Header>
+      <main>
+        <section>
+          <p>Html <span data-tip="...oziroma njegova koda">dokument</span> je sestavljen iz <span data-tip="...katere imenujemo tudi 'elementi'">znack</span> in njihovih <span data-tip="...z domaco besedo 'lastnosti'">atributov</span>, s katerimi opisemo vsebino na nasi spletni strani. Obstajajo znacke za prikaz, medijskih vsebin (<code>img</code>, video, audio,...), teksta (h1, p, span, b,..) in raznih drugih vsebin. </p>
+          <p>Z atributi opisemo dodatne lastnosti nasih html elementov, na primer njihovo velikost (npr.: <code>width="10"</code>), razred (npr.: <code>class="rdeci-tekst"</code>), identifikator (npr.: <code>id="glavni-naslov"</code>), izvor (<code>src="https://spletna-stran.com/slika.png"</code>), itd..</p>
+        </section>
+
+        <section>
         <h2>Osnovne znacke</h2>
 
         <details>
           <summary>
-            Naslovi (<code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>,...)
+            Naslovi <code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>,...
           </summary>
           <div>
+            <HtmlInfoTable
+              tag="h1"
+              isTwoPart={true}
+            />
             <CodeEditor code={`<h1>Najvecji naslov</h1>`} height={editorHeight}/>
           </div>
         </details>
@@ -50,6 +83,10 @@ function Html() {
             Odstavek <code>&lt;p&gt;</code>
           </summary>
           <div>
+            <HtmlInfoTable
+              tag="p"
+              isTwoPart={true}
+            />
             <CodeEditor code={`<p>Moj odstavek ...</p>`} height={editorHeight}/>
           </div>
         </details>
@@ -59,6 +96,14 @@ function Html() {
             Povezave <code>&lt;a&gt;</code>
           </summary>
           <div>
+            <HtmlInfoTable
+              tag="a"
+              isTwoPart={false}
+              attributes={[
+                {name: 'href', about: 'Dolocimo ciljno spletno stran.'},
+                {name: 'target', about: 'Opisemo nacin odpiranja povezave (v novem oknu, v novem zavihku).'},
+              ]}
+            />
             <CodeEditor code={linkExample} height={editorHeight}/>
           </div>
         </details>
@@ -68,43 +113,62 @@ function Html() {
             Slike <code>&lt;img&gt;</code>
           </summary>
           <div>
-            <DetailsTable>
-              <tr>
-                <td className="title">Atributi</td>
-                <td><i>src</i>, <i>alt</i>, <i>width</i></td>
-              </tr>
-              <tr>
-                <td className="title">Dvodelna</td>
-                <td>NE</td>
-              </tr>
-            </DetailsTable>
+            <HtmlInfoTable
+              tag="img"
+              isTwoPart={false}
+              attributes={[
+                {name: 'src', about: 'Dolocimo izvor do slike (url ali lokalna pot).'},
+                {name: 'alt', about: 'Opisemo vsebino slike z besedami.'},
+                {name: 'width', about: 'Dolocimo sirino slike.'},
+                {name: 'height', about: 'Dolocimo visino slike.'},
+              ]}
+            />
             <CodeEditor code={imgExample} height={editorHeight} />
           </div>
         </details>
       </section>
-      <section>
-        <h2>Bodi pozoren na ...</h2>
-        <details>
-          <summary>
-            Kako pises znacke
-          </summary>
-          <div>
-            <p>
-              Vecina znack (npr.: <code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;div&gt;</code>) imajo vedno dva dela <code>&lt;h1&gt; ... vsebina ... &lt;/h1&gt;</code>.
-            </p>
-            <p>
-              Izjema je nekaj znack, ki ne potrebujejo dodatne vsebina, ampak vsebino opisemo ze z npr. atributi <code>&lt;img src="../pot/do/slike.ong" /&gt;</code>
-            </p>
-          </div>
-        </details>
-      </section>
+
+        <section>
+          <h2>Osnovni koncepti</h2>
+          <details>
+            <summary>
+              Unikatni identifikator elementa <code>id="..."</code>
+            </summary>
+            <div>
+              <p>Unikatni identifikator elementa oznacuje tocno dolocen element z dolocenim imenom. Z dodajanjem kode <code>id="glavni-naslov"</code>, lahko enemu samemu elementu na nasi strani dolocimo unikatno ime "glavni-naslov". Z css stilom bi lahko temu elementu dodali unikatni stil (naprimer mu spremenili barvo besedila).</p>
+              <CodeEditor code={idExample} height={editorHeight}/>
+            </div>
+          </details>
+          <details>
+            <summary>
+              Razred elementa <code>class="..."</code>
+            </summary>
+            <div>
+              <p>Razred je skupina sorodnih elementov (v tem primeru so to html elementi). Z dodajanjem kode <code>class="rdeca"</code>, uvrstimo katerikoli html element v razred z imenom "rdeca". Z css stilom bi lahko vsem elementeom tega razreda dodali enake stile (na primer pobarvali besedilo z rdeco barvo).</p>
+              <CodeEditor code={classExample} height={editorHeight}/>
+            </div>
+          </details>
+        </section>
+
+        <section>
+          <h2>Bodi pozoren na ...</h2>
+          <details>
+            <summary>
+              Kako pises znacke
+            </summary>
+            <div>
+              <p>
+                Vecina znack (npr.: <code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;div&gt;</code>) imajo vedno dva dela <code>&lt;h1&gt; ... vsebina ... &lt;/h1&gt;</code>.
+              </p>
+              <p>
+                Izjema je nekaj znack, ki ne potrebujejo dodatne vsebina, ampak vsebino opisemo ze z npr. atributi <code>&lt;img src="../pot/do/slike.ong" /&gt;</code>
+              </p>
+            </div>
+          </details>
+        </section>
     </main>
-    </>
+    </Fragment>
   )
 }
-
-const DetailsTable = styled.table`
-  margin-bottom: 15px;
-`;
 
 export default Html;

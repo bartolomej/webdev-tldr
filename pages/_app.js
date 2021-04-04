@@ -13,8 +13,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   main {
-    max-width: 700px;
+    max-width: ${({ theme }) => theme.constants.containerWidth};
     margin: auto;
+  }
+  
+  section {
+    margin-bottom: 50px;
   }
 
   table {
@@ -28,14 +32,6 @@ const GlobalStyle = createGlobalStyle`
     td {
       padding: 5px;
       border: 2px solid ${({ theme }) => theme.colors.light};
-    }
-  }
-
-  header {
-    width: 100%;
-
-    h1 {
-      text-align: center;
     }
   }
 
@@ -82,20 +78,22 @@ const GlobalStyle = createGlobalStyle`
   }
 
   *[data-tip] {
-    border-bottom: 1px dotted ${({ theme }) => theme.colors.primary};
+    border-bottom: 1px dotted ${({ theme }) => theme.colors.dark};
     cursor: help;
   }
 `
 
 const theme = {
   colors: {
-    primary: '#D81E5B',
+    // TODO: change colors
+    primary: '#444CF7',
     secondary: '#EB5E55',
     dark: '#3A3335',
     light: '#F1F2EB'
   },
   constants: {
-    smBorderRadius: '8px'
+    smBorderRadius: '8px',
+    containerWidth: '700px',
   },
   styles: {
     boxShadow: (focused) => `-1px 1px ${focused ? '50px' : '30px'} -10px rgb(0 0 0 / 30%), 0 18px 36px -18px rgb(0 0 0 / 33%)`
