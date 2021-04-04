@@ -1,6 +1,8 @@
 # WebDev TLDR;
 
-An educational website with short, explanatory & interactive code examples.
+An educational website with short, explanatory & interactive code examples. 
+
+Made with [React.js](https://reactjs.org/) (UI framework) and [Next.js](https://nextjs.org/) (React.js framework for Server Side Rendering).
 
 ## Setup
 
