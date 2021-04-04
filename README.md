@@ -1,3 +1,5 @@
+![](./public/thumbnail.png)
+
 # WebDev TLDR;
 
 An educational website with short, explanatory & interactive code examples. 
