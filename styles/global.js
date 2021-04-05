@@ -85,7 +85,6 @@ export default createGlobalStyle`
   code {
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
     font-size: 12px;
-    display: inline-block;
     padding: 3px 5px;
     border-radius: ${({ theme }) => theme.constants.smBorderRadius};
     background: ${({ theme }) => theme.colors.lightDark};
