@@ -139,7 +139,8 @@ function CodeEditor ({
     iframeDoc.write(internalScripts());
     iframeDoc.write(formatContent());
     iframeDoc.close();
-    iframeWindow.location.reload(); // clean JS context (clear declared variables,..)
+    // TODO: fix issues with reload() call
+    // iframeWindow.location.reload(); // clean JS context (clear declared variables,..)
   }
 
   useEffect(() => {
