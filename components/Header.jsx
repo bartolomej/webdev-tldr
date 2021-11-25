@@ -18,10 +18,10 @@ const Container = styled.header`
   min-height: 30vh;
   display: flex;
   overflow: auto;
-  background: ${({background, theme}) => background || theme.colors.primary};
+  background: ${({background, theme}) => background || theme.colors.primary}B0;
   
   h1,p {
-    color: ${({theme}) => theme.colors.light};
+    color: ${({theme}) => theme.colors.white};
   }
 
   h1 {

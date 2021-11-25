@@ -2,11 +2,11 @@ import { createGlobalStyle } from "styled-components";
 
 
 export default createGlobalStyle`
-  
+
   * {
     box-sizing: border-box;
   }
-  
+
   body {
     margin: 0;
     padding: 0;
@@ -20,7 +20,7 @@ export default createGlobalStyle`
       padding: 0 20px;
     }
   }
-  
+
   section {
     margin-bottom: 60px;
   }
@@ -39,16 +39,16 @@ export default createGlobalStyle`
     }
   }
 
-  h1, h2 {
+  h1, h2, h3, h4, h5, h6 {
     color: ${({ theme }) => theme.colors.primary};
   }
   
-  h3, h4, h5, h6, p {
+  h3, h4, h5, h6, p, ul {
     color: ${({ theme }) => theme.colors.dark};
   }
 
-  p {
-    line-height: 1.8rem;
+  p, blockquote {
+    line-height: 1.5rem;
   }
 
   button {
@@ -77,11 +77,7 @@ export default createGlobalStyle`
       margin-top: 20px;
     }
   }
-
-  h3, h4, h5, h6 {
-    color: ${({ theme }) => theme.colors.primary};
-  }
-
+  
   code {
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
     font-size: 12px;
@@ -89,6 +85,12 @@ export default createGlobalStyle`
     border-radius: ${({ theme }) => theme.constants.smBorderRadius};
     background: ${({ theme }) => theme.colors.lightDark};
     color: ${({ theme }) => theme.colors.light};
+  }
+
+  blockquote {
+    padding: 0 1em;
+    border-left: 0.25em solid ${({ theme }) => theme.colors.lightDark};
+    margin: 1em 0;
   }
 
   *[data-tip] {

@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import { FaHtml5 } from 'react-icons/fa';
 import HtmlInfoTable from "../components/HtmlInfoTable";
 import Head from "next/head";
+import {theme} from "../styles/theme";
 
 const imgExample =
 `<img 
@@ -56,11 +57,11 @@ function Html() {
         <title>WebDev TLDR; - HTML</title>
       </Head>
       <Background opacity={0.1} />
-      <Header backgroundColor="#e96228">
+      <Header backgroundColor={theme.colors.html}>
         <h1>HTML <FaHtml5 /> </h1>
         <p><span data-tip="...ali Hyper Text Markup Language na dolgo">Html</span> je t.i. <span data-tip={`po anglesko "markup language"`}>"oznacevalni jezik"</span>, saj z njim opisujemo strukturo (zgradbo) dokumenta (najveckrat je to spletna stran).</p>
       </Header>
-      <Main color="#e96228">
+      <Main color={theme.colors.html}>
         <section>
           <p>Html <span data-tip="...oziroma njegova koda">dokument</span> je sestavljen iz <span data-tip="...katere imenujemo tudi 'elementi'">znack</span> in njihovih <span data-tip="...z domaco besedo 'lastnosti'">atributov</span>, s katerimi opisemo vsebino na nasi spletni strani. Obstajajo znacke za prikaz, medijskih vsebin (<code>img</code>, video, audio,...), teksta (h1, p, span, b,..) in raznih drugih vsebin. </p>
           <p>Z atributi opisemo dodatne lastnosti nasih html elementov, na primer njihovo velikost (npr.: <code>width="10"</code>), razred (npr.: <code>class="rdeci-tekst"</code>), identifikator (npr.: <code>id="glavni-naslov"</code>), izvor (<code>src="https://spletna-stran.com/slika.png"</code>), itd..</p>
@@ -78,7 +79,7 @@ function Html() {
               tag="h1"
               isTwoPart={true}
             />
-            <CodeEditor code={`<h1>Najvecji naslov</h1>`} height={editorHeight}/>
+            <CodeEditor autorun code={`<h1>Najvecji naslov</h1>`} height={editorHeight}/>
           </div>
         </details>
 
@@ -91,7 +92,7 @@ function Html() {
               tag="p"
               isTwoPart={true}
             />
-            <CodeEditor code={`<p>Moj odstavek ...</p>`} height={editorHeight}/>
+            <CodeEditor autorun code={`<p>Moj odstavek ...</p>`} height={editorHeight}/>
           </div>
         </details>
 
@@ -108,7 +109,7 @@ function Html() {
                 {name: 'target', about: 'Opisemo nacin odpiranja povezave (v novem oknu, v novem zavihku).'},
               ]}
             />
-            <CodeEditor code={linkExample} height={editorHeight}/>
+            <CodeEditor autorun code={linkExample} height={editorHeight}/>
           </div>
         </details>
 
@@ -127,7 +128,7 @@ function Html() {
                 {name: 'height', about: 'Dolocimo visino slike.'},
               ]}
             />
-            <CodeEditor code={imgExample} height={editorHeight} />
+            <CodeEditor autorun code={imgExample} height={editorHeight} />
           </div>
         </details>
       </section>
@@ -140,7 +141,7 @@ function Html() {
             </summary>
             <div>
               <p>Unikatni identifikator elementa oznacuje tocno dolocen element z dolocenim imenom. Z dodajanjem kode <code>id="glavni-naslov"</code>, lahko enemu samemu elementu na nasi strani dolocimo unikatno ime "glavni-naslov". Z css stilom bi lahko temu elementu dodali unikatni stil (naprimer mu spremenili barvo besedila).</p>
-              <CodeEditor code={idExample} height={editorHeight}/>
+              <CodeEditor autorun code={idExample} height={editorHeight}/>
             </div>
           </details>
           <details>
@@ -149,7 +150,7 @@ function Html() {
             </summary>
             <div>
               <p>Razred je skupina sorodnih elementov (v tem primeru so to html elementi). Z dodajanjem kode <code>class="rdeca"</code>, uvrstimo katerikoli html element v razred z imenom "rdeca". Z css stilom bi lahko vsem elementeom tega razreda dodali enake stile (na primer pobarvali besedilo z rdeco barvo).</p>
-              <CodeEditor code={classExample} height={editorHeight}/>
+              <CodeEditor autorun code={classExample} height={editorHeight}/>
             </div>
           </details>
         </section>

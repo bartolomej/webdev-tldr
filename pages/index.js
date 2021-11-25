@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
 import LangCard from "../components/LangCard";
 import styled from "styled-components";
-import { FaHtml5, FaCss3Alt } from 'react-icons/fa';
+import { FaHtml5, FaCss3Alt, FaJsSquare } from 'react-icons/fa';
 import { Background } from "../styles/shared";
 import Head from "next/head";
+import { theme } from "../styles/theme";
 
 export default function Home() {
 
@@ -19,8 +20,9 @@ export default function Home() {
           <p>Povzetki o pomembnih temah CSS, HTML.</p>
         </Header>
         <CardWrapper>
-          <LangCard href="/html" title="HTML" icon={<FaHtml5 color={'#e96228'}/>}/>
-          <LangCard href="/css" title="CSS" icon={<FaCss3Alt color={'#2862e9'}/>}/>
+          <LangCard href="/html" title="HTML" icon={<FaHtml5 color={theme.colors.html}/>}/>
+          <LangCard href="/css" title="CSS" icon={<FaCss3Alt color={theme.colors.css}/>}/>
+          <LangCard href="/js" title="JS" icon={<FaJsSquare color={theme.colors.js}/>}/>
         </CardWrapper>
       </MainWrapper>
   </Fragment>

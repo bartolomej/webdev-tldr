@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import { FaCss3Alt } from "react-icons/fa";
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import { theme } from "../styles/theme";
 
 const tagNameSelectorExample =
 `<h1>Naslov 1</h1>
@@ -117,11 +118,11 @@ function Css() {
         <title>WebDev TLDR; - CSS</title>
       </Head>
       <Background opacity={0.1} />
-      <Header backgroundColor="#2862e9">
+      <Header backgroundColor={theme.colors.css}>
         <h1>CSS <FaCss3Alt /> </h1>
         <p><span data-tip="...ali Cascading Style Sheets na dolgo">Css</span> je t.i. "stilni jezik", saj lahki njegovo pomocjo html elementom dolocimo vizualne stile.</p>
       </Header>
-      <Main color="#2862e9">
+      <Main color={theme.colors.css}>
         <section>
           <h2>Izbiranje elementov</h2>
           <details>
@@ -129,7 +130,7 @@ function Css() {
               Izbiranje po imenu html elementa <code>{`h1 { ... }`}</code>
             </summary>
             <div>
-              <CodeEditor code={tagNameSelectorExample} height={editorHeight}/>
+              <CodeEditor autorun code={tagNameSelectorExample} height={editorHeight}/>
             </div>
           </details>
 
@@ -138,7 +139,7 @@ function Css() {
               Izbiranje po imenu vec html elementov <code>{`h1, h2 { ... }`}</code>
             </summary>
             <div>
-              <CodeEditor code={multiTagNamesSelectorExample} height={editorHeight}/>
+              <CodeEditor autorun code={multiTagNamesSelectorExample} height={editorHeight}/>
             </div>
           </details>
 
@@ -147,7 +148,7 @@ function Css() {
               Izbiranje po <span data-tip="ID = Unikatni Identifikator">ID-ju</span> <code>{`#moj-element { ... }`}</code>
             </summary>
             <div>
-              <CodeEditor code={idSelectorExample} height={editorHeight}/>
+              <CodeEditor autorun code={idSelectorExample} height={editorHeight}/>
             </div>
           </details>
 
@@ -156,7 +157,7 @@ function Css() {
               Izbiranje po <span data-tip="class = razred sorodnih html elementov">class-u</span> <code>{`.moji-elementi { ... }`}</code>
             </summary>
             <div>
-              <CodeEditor code={classSelectorExample} height={'300px'}/>
+              <CodeEditor autorun code={classSelectorExample} height={'300px'}/>
             </div>
           </details>
         </section>
@@ -169,7 +170,7 @@ function Css() {
               Spreminjanje barv
             </summary>
             <div>
-              <CodeEditor code={colorCommandsExample} height={'300px'}/>
+              <CodeEditor autorun code={colorCommandsExample} height={'300px'}/>
             </div>
           </details>
 
@@ -178,7 +179,7 @@ function Css() {
               Dodajanje vmesnega prostora
             </summary>
             <div>
-              <CodeEditor code={boxModelExample} height={'300px'}/>
+              <CodeEditor autorun code={boxModelExample} height={'300px'}/>
             </div>
           </details>
 
@@ -187,7 +188,7 @@ function Css() {
               Tekstovni stili
             </summary>
             <div>
-              <CodeEditor code={fontCommandsExample} height={'300px'}/>
+              <CodeEditor autorun code={fontCommandsExample} height={'300px'}/>
             </div>
           </details>
         </section>
