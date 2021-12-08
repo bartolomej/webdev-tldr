@@ -62,6 +62,7 @@ function CodeEditor ({
     }
     const formatted = formatCode(value);
     if (formatted !== value) {
+      // TODO: don't update value with formatted code until cursor offset is not set
       setValue(value);
     }
   }, [value])
@@ -83,11 +84,18 @@ function CodeEditor ({
   }, [])
 
   function formatCode (code) {
+    // execute formatting in worker if needed
+    // https://github.com/prettier/prettier/blob/main/website/playground/WorkerApi.js
     try {
-      const formattedCode = prettier.format(code, prettierOptions)
+      // TODO: why does prettier not detect or format js or css code ?
+      const {
+        formatted,
+        comments,
+        cursorOffset // TODO: move cursor after formatting
+      } = prettier.formatWithCursor(code, prettierOptions)
       // reset error when code contains no syntax errors
       setSyntaxError(null);
-      return formattedCode;
+      return formatted;
     } catch (e) {
       // TODO: highlight line directly in ace code editor ?
       // TODO: use e.loc properties to extract info about error location
@@ -100,18 +108,18 @@ function CodeEditor ({
     const codeLineRegex = /[ ]+[0-9]+ \|/;
     const errorLineRegex = />[ ]+[0-9]+/;
     const errorPointerLineRegex = /[ ]+\|[ ]+[^]+[.]*/;
-    return syntaxError.message.split("\n").map(line => {
+    return syntaxError.message.split("\n").map((line, i) => {
       // check if syntax error is on current line
       if (errorLineRegex.test(line)) {
-        return <MarkedCodeFrameLine>{line}</MarkedCodeFrameLine>
+        return <MarkedCodeFrameLine key={i}>{line}</MarkedCodeFrameLine>
       }
       if (codeLineRegex.test(line)) {
-        return <CodeFrameLine>{line}</CodeFrameLine>;
+        return <CodeFrameLine key={i}>{line}</CodeFrameLine>;
       }
       if (errorPointerLineRegex.test(line)) {
-        return <PointerCodeFrameLine>{line}</PointerCodeFrameLine>
+        return <PointerCodeFrameLine key={i}>{line}</PointerCodeFrameLine>
       }
-      return <SyntaxErrorMessage>{line}</SyntaxErrorMessage>
+      return <SyntaxErrorMessage key={i}>{line}</SyntaxErrorMessage>
     })
   }
 
@@ -352,10 +360,6 @@ const IframeHidden = styled.iframe`
 
 const SyntaxErrorWrapper = styled.div`
   padding: 5px;
-
-  pre {
-    margin: 0;
-  }
 `;
 
 const CodeFrameLine = styled.code`
