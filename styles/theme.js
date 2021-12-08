@@ -1,6 +1,7 @@
 export const theme = {
   colors: {
     // TODO: change colors
+    red: '#da2748',
     primary: '#E76F51',
     secondary: '#2A9D8F',
     dark: '#264653',

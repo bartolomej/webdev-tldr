@@ -1,21 +1,37 @@
 import React, { useState, useEffect, useRef } from "react";
 import AceEditor from "react-ace";
 import styled from 'styled-components'
-import { AiOutlineFullscreen, AiOutlineFullscreenExit, AiFillStepForward } from "react-icons/ai";
+import {
+  AiOutlineFullscreen,
+  AiOutlineFullscreenExit,
+  AiFillStepForward
+} from "react-icons/ai";
 import { IoPlayOutline } from "react-icons/io5";
 
+// ace common
+import "ace-builds/src-noconflict/theme-xcode"
+import "ace-builds/src-min-noconflict/ext-searchbox";
+import "ace-builds/src-min-noconflict/ext-language_tools";
+
+// ace language support
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-css"
 import "ace-builds/src-noconflict/mode-html"
 
-import "ace-builds/src-min-noconflict/ext-searchbox";
-import "ace-builds/src-min-noconflict/ext-language_tools";
-
-import "ace-builds/src-noconflict/theme-xcode"
+// ace language snippets
 import "ace-builds/src-noconflict/snippets/html"
 import "ace-builds/src-noconflict/snippets/css"
 import "ace-builds/src-noconflict/snippets/javascript"
 
+// prettier
+import prettier from "prettier/standalone";
+import parserHtml from "prettier/parser-html";
+
+
+const prettierOptions = {
+  parser: "html",
+  plugins: [parserHtml]
+}
 
 function CodeEditor ({
   open = true,
@@ -33,6 +49,7 @@ function CodeEditor ({
   const [value, setValue] = useState(code);
   const [isFocused, setFocused] = useState(false);
   const [isFullscreen, setFullscreen] = useState(fullscreen);
+  const [syntaxError, setSyntaxError] = useState(null);
   const iframeRef = useRef();
 
   useEffect(() => {
@@ -40,8 +57,24 @@ function CodeEditor ({
   }, [code])
 
   useEffect(() => {
+    if (iframeRef.current && autorun) {
+      updateIframeContent();
+    }
+    const formatted = formatCode(value);
+    if (formatted !== value) {
+      setValue(value);
+    }
+  }, [value])
+
+  useEffect(() => {
     setFullscreen(fullscreen);
   }, [fullscreen])
+
+  useEffect(() => {
+    if (!syntaxError && autorun) {
+      updateIframeContent()
+    }
+  }, [syntaxError])
 
   useEffect(() => {
     listenIframeEvents();
@@ -49,19 +82,53 @@ function CodeEditor ({
     return () => window.removeEventListener("keydown", onKeyPress)
   }, [])
 
-  function listenIframeEvents() {
-    window.addEventListener('message', function(response) {
+  function formatCode (code) {
+    try {
+      const formattedCode = prettier.format(code, prettierOptions)
+      // reset error when code contains no syntax errors
+      setSyntaxError(null);
+      return formattedCode;
+    } catch (e) {
+      // TODO: highlight line directly in ace code editor ?
+      // TODO: use e.loc properties to extract info about error location
+      setSyntaxError(e);
+      return code;
+    }
+  }
+
+  function renderCodeFrame () {
+    const codeLineRegex = /[ ]+[0-9]+ \|/;
+    const errorLineRegex = />[ ]+[0-9]+/;
+    const errorPointerLineRegex = /[ ]+\|[ ]+[^]+[.]*/;
+    return syntaxError.message.split("\n").map(line => {
+      // check if syntax error is on current line
+      if (errorLineRegex.test(line)) {
+        return <MarkedCodeFrameLine>{line}</MarkedCodeFrameLine>
+      }
+      if (codeLineRegex.test(line)) {
+        return <CodeFrameLine>{line}</CodeFrameLine>;
+      }
+      if (errorPointerLineRegex.test(line)) {
+        return <PointerCodeFrameLine>{line}</PointerCodeFrameLine>
+      }
+      return <SyntaxErrorMessage>{line}</SyntaxErrorMessage>
+    })
+  }
+
+  function listenIframeEvents () {
+    window.addEventListener('message', function (response) {
       // Make sure message is from our iframe, extensions like React dev tools might use the same technique and mess up our logs
       if (response.data && response.data.source === 'iframe') {
         const payload = JSON.parse(response.data.message);
         switch (payload.type) {
-          case "log": return handleLogMessage(payload);
+          case "log":
+            return handleLogMessage(payload);
         }
       }
     });
   }
 
-  function handleLogMessage(payload) {
+  function handleLogMessage (payload) {
     switch (payload.logLevel) {
       case "warn":
       case "error":
@@ -82,14 +149,16 @@ function CodeEditor ({
     }
   }
 
-  function formatContent() {
+  function formatContent () {
     switch (lang) {
-      case "javascript": return `<script>${value}</script>`
-      default: return value;
+      case "javascript":
+        return `<script>${value}</script>`
+      default:
+        return value;
     }
   }
 
-  function internalScripts() {
+  function internalScripts () {
     return `
       <script>
         // Save the current console log function in case we need it.
@@ -99,7 +168,7 @@ function CodeEditor ({
           warn: console.warn,
           info: console.info,
         });
-        
+
         function emitMessage(data) {
           window.parent.postMessage(
             {
@@ -109,7 +178,7 @@ function CodeEditor ({
             '*'
           );
         }
-        
+
         function emitLog(logLevel) {
           return function (...rest) {
             // window.parent is the parent frame that made this window
@@ -117,12 +186,12 @@ function CodeEditor ({
               type: "log",
               logLevel,
               arguments: rest
-            })  
+            })
             // Finally applying the console statements to saved instance earlier
             overwrites[logLevel].apply(console, arguments);
           };
         }
-        
+
         // Override the console
         console.log = emitLog("log");
         console.error = emitLog("error");
@@ -143,12 +212,6 @@ function CodeEditor ({
     // iframeWindow.location.reload(); // clean JS context (clear declared variables,..)
   }
 
-  useEffect(() => {
-    if (iframeRef.current && autorun) {
-      updateIframeContent();
-    }
-  }, [value])
-
   const renderFullscreenToggle = () => isFullscreen ? (
     <ControlButton onClick={() => {
       setFullscreen(false);
@@ -165,7 +228,7 @@ function CodeEditor ({
     </ControlButton>
   )
 
-  const renderRunButton = () => !autorun && (
+  const renderRunButton = () => !autorun && !syntaxError && (
     <ControlButton onClick={() => {
       updateIframeContent()
     }}>
@@ -205,12 +268,21 @@ function CodeEditor ({
             }}
           />
         </EditorSide>
-        {websitePreview ? (
+        {syntaxError ? (
           <PreviewSide>
-            <Iframe ref={iframeRef}/>
+            <SyntaxErrorWrapper>
+              <SyntaxErrorTitle>POZOR NAPAKA V KODI!</SyntaxErrorTitle>
+              <pre>{renderCodeFrame()}</pre>
+            </SyntaxErrorWrapper>
           </PreviewSide>
         ) : (
-          <IframeHidden ref={iframeRef} />
+          websitePreview ? (
+            <PreviewSide>
+              <Iframe ref={iframeRef}/>
+            </PreviewSide>
+          ) : (
+            <IframeHidden ref={iframeRef}/>
+          )
         )}
       </Container>
     </OuterContainer>
@@ -262,6 +334,8 @@ const EditorSide = styled.div`
 
 const PreviewSide = styled.div`
   flex: 1;
+  background: white;
+  max-width: 50%;
 `
 
 const Iframe = styled.iframe`
@@ -274,6 +348,41 @@ const Iframe = styled.iframe`
 
 const IframeHidden = styled.iframe`
   display: none;
+`;
+
+const SyntaxErrorWrapper = styled.div`
+  padding: 5px;
+
+  pre {
+    margin: 0;
+  }
+`;
+
+const CodeFrameLine = styled.code`
+  border: none;
+  background: none;
+  display: block;
+  color: ${({ theme }) => theme.colors.lightDark}
+`;
+
+const MarkedCodeFrameLine = styled(CodeFrameLine)`
+  background: ${({ theme }) => theme.colors.red};
+  color: ${({ theme }) => theme.colors.light};
+`;
+
+const PointerCodeFrameLine = styled(CodeFrameLine)`
+  color: ${({ theme }) => theme.colors.red};
+`;
+
+const SyntaxErrorTitle = styled.b`
+  color: ${({ theme }) => theme.colors.red};
+  padding: 5px;
+`;
+
+const SyntaxErrorMessage = styled(CodeFrameLine)`
+  white-space: normal;
+  line-height: 1.4;
+  margin-bottom: 5px;
 `;
 
 export default CodeEditor

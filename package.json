@@ -9,6 +9,7 @@
   "dependencies": {
     "ace-builds": "^1.4.12",
     "next": "latest",
+    "prettier": "^2.5.1",
     "react": "^16.8.0",
     "react-ace": "^9.4.0",
     "react-dom": "^16.8.0",
