@@ -50,6 +50,10 @@ export default createGlobalStyle`
   p, blockquote {
     line-height: 1.5rem;
   }
+  
+  li {
+    line-height: 1.8;
+  }
 
   button {
     background: none;

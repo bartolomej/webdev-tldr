@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 function Layout ({ children }) {
   const router = useRouter();
   const [isEditorOpen, setEditorOpen] = useState(false)
-  const CodeEditor = dynamic(() => import("../components/CodeEditor"), { ssr: false })
+  const CodeEditor = dynamic(() => import("./code/CodeEditor"), { ssr: false })
 
   return (
     <Fragment>

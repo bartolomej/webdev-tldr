@@ -5,12 +5,14 @@ import "../styles/font.css"
 import Layout from "../components/Layout";
 import { theme } from "../styles/theme";
 import GlobalStyle from "../styles/global";
+import { Toaster } from "react-hot-toast";
 
 export default function App({ Component, pageProps }) {
   const ReactTooltip = dynamic(() => import("react-tooltip"), {ssr: false})
   return (
     <Fragment>
       <ThemeProvider theme={theme}>
+        <Toaster/>
         <ReactTooltip />
         <GlobalStyle />
         <Layout>

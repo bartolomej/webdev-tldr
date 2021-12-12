@@ -48,7 +48,7 @@ const idExample =
 `;
 
 function Html() {
-  const CodeEditor = dynamic(() => import("../components/CodeEditor"), {ssr: false})
+  const CodeEditor = dynamic(() => import("../components/code/CodeEditor"), {ssr: false})
   const editorHeight = "200px"
 
   return (

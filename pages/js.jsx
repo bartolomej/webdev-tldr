@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import { theme } from "../styles/theme";
 import { IoPlayOutline } from "react-icons/io5";
+import InlineCode from "../components/code/InlineCode";
 
 const whereToWriteJs =
   `<!DOCTYPE html>
@@ -54,8 +55,27 @@ let steviloUcencevBrezNaloge = 15;
 let ime = "Matej";
 `
 
+const basicUserInteraction =
+  `// najprej vprasamo uporabnika po potrebnih podatkih
+// uporabimo prompt() ukaz (temu recemo tudi funkcija)
+// alert() = window.alert()
+let ime = prompt("Vnesi ime")
+let priimek = prompt("Vnesi priimek")
+
+// zdaj imamo v "ime" in "priimek" v spremenljivkah shranjena dva niza, ki predstavljata uporabnikovo ime in priiimek
+// zelimo izpisati celo ime uporabnika
+// to naredimo tako da zlepimo skupaj "ime" in "priimek"
+// ne smemo pozabiti na presledek (' ')
+let celoIme = ime + ' ' + priimek;
+ 
+// spodnje funkcije/ukaze lahko uporabimo za izpisovanje vrednosti (stevil, nizov, logicnih tipov,...)
+alert(celoIme); // prikaze modalno okno
+console.log(celoIme); // izpise v konzolo
+document.write(celoIme); // izpise na html stran
+`
+
 function Css () {
-  const CodeEditor = dynamic(() => import("../components/CodeEditor"), { ssr: false })
+  const CodeEditor = dynamic(() => import("../components/code/CodeEditor"), { ssr: false })
   const editorHeight = "500px"
 
   return (
@@ -72,6 +92,7 @@ function Css () {
 
         <section>
           <h2>Uvod</h2>
+
           <details>
             <summary>
               Kje lahko pisemo JavaScript kodo ?
@@ -104,6 +125,25 @@ function Css () {
               <CodeEditor lang="javascript" websitePreview={false} code={dataInJs} height={editorHeight}/>
             </div>
           </details>
+
+          <details>
+            <summary>
+              Osnovna interakcija z uporabnikom
+            </summary>
+            <div>
+              <p>Na naših spletnih straneh bomo velikokrat potrebovali, da uporabnik vnese ali pa razbere dolocene podatke.</p>
+              <p>Na primer, na spletni strani, ki vsebuje prijavo oz. registracijo uporabnikov, bo uporabnik potreboval vpisati svoje uporabnisko ime in geslo (*vnos podatkov*), ter razbrati, ali je vneseno geslo pravilno ali ne. Da bomo lahko sprogramirali tako spletno stran, bomo morali spoznati nekaj nacinov za *interakcijo* z uporabnikom. </p>
+              <p>Za vnos lahko uporabimo <InlineCode executable>prompt("Vnesi karkoli")</InlineCode>, medtem ko imamo za izpis podatkov vec izbire:</p>
+              <ul>
+                <li><InlineCode executable>alert("izpiz v modalnem oknu")</InlineCode></li>
+                <li><InlineCode executable>console.log("izpis v konzoli")</InlineCode></li>
+                <li><InlineCode>document.write("izpis v html")</InlineCode></li>
+              </ul>
+              <p>Spodaj je primer programa, ki od uporabnika zahteva ime in priimek, ta dva niza zdruzi v en niz *celoIme*, ter ta podatek izpise na vec razlicnih nacinov.</p>
+              <CodeEditor lang="javascript" websitePreview={false} code={basicUserInteraction} height={editorHeight}/>
+            </div>
+          </details>
+
         </section>
 
       </Main>
