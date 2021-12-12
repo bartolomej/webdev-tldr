@@ -37,6 +37,7 @@ function InlineCode({ children, onExecute, onError = () => null, executable = fa
 
   return (
     <Code
+      data-splitbee-event="InlineCode run"
       data-tip={executable && "Pritisni in izvedi kodo."}
       clickable={executable}
       onClick={execute}

@@ -221,14 +221,14 @@ function CodeEditor ({
   }
 
   const renderFullscreenToggle = () => isFullscreen ? (
-    <ControlButton onClick={() => {
+    <ControlButton data-splitbee-event="CodeEditor small" onClick={() => {
       setFullscreen(false);
       onToggle(false)
     }}>
       <AiOutlineFullscreenExit size={15}/>
     </ControlButton>
   ) : (
-    <ControlButton onClick={() => {
+    <ControlButton data-splitbee-event="CodeEditor fullscreen" onClick={() => {
       setFullscreen(true);
       onToggle(true)
     }}>
@@ -237,7 +237,7 @@ function CodeEditor ({
   )
 
   const renderRunButton = () => !autorun && !syntaxError && (
-    <ControlButton onClick={() => {
+    <ControlButton data-splitbee-event="CodeEditor run" onClick={() => {
       updateIframeContent()
     }}>
       <IoPlayOutline size={15}/>
