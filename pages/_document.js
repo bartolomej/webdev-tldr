@@ -53,6 +53,8 @@ export default class MyDocument extends Document {
           <meta property="twitter:title" content="WebDev TLDR;"/>
           <meta property="twitter:description" content="Povzetki o pomembnih temah CSS, HTML."/>
           <meta property="twitter:image" content="/thumbnail.png"/>
+
+          <script async src="https://cdn.splitbee.io/sb.js"/>
         </Head>
         <body>
         <Main/>
