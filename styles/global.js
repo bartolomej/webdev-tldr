@@ -82,7 +82,7 @@ export default createGlobalStyle`
     }
   }
   
-  code {
+  code, pre {
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
     font-size: 12px;
     padding: 3px 5px;

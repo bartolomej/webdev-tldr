@@ -4,12 +4,12 @@ import { toast } from "react-hot-toast";
 import { theme } from "../../styles/theme";
 
 
-function InlineCode({ children, onExecute, onError = () => null, executable = false }) {
+function Code({ block = false, code, children, onExecute, onError = () => null, executable = false }) {
+  const value = code || children;
 
   function execute() {
     try {
-      console.log(children)
-      const result = eval(children);
+      const result = eval(value);
       if (result && onExecute) {
         onExecute(result)
       } else if (result) {
@@ -43,21 +43,35 @@ function InlineCode({ children, onExecute, onError = () => null, executable = fa
   }
 
   return (
-    <Code
-      data-splitbee-event="InlineCode run"
+    <Container
+      data-splitbee-event="Code run"
       data-tip={executable ? "Pritisni in izvedi kodo." : null}
       clickable={executable}
+      block={block}
       onClick={onClick}
     >
-      {children}
-    </Code>
+      {value}
+    </Container>
   )
 }
 
-const Code = styled.code`
+function Container({ block, ...props }) {
+  return (
+    block
+      ? <BlockContainer {...props} />
+      : <InlineContainer {...props} />
+  )
+}
+
+const InlineContainer = styled.code`
   border-radius: 5px;
   ${props => props.clickable ? 'cursor: pointer;' : ''}
 `
 
+const BlockContainer = styled.pre`
+  border-radius: 5px;
+  ${props => props.clickable ? 'cursor: pointer;' : ''}
+`;
 
-export default InlineCode;
+
+export default Code;

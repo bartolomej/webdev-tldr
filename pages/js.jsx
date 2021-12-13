@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import { theme } from "../styles/theme";
 import { IoPlayOutline } from "react-icons/io5";
-import InlineCode from "../components/code/InlineCode";
+import Code from "../components/code/Code";
 
 const whereToWriteJs =
   `<!DOCTYPE html>
@@ -148,15 +148,15 @@ function Css () {
             <div>
               <p>Na naših spletnih straneh bomo velikokrat potrebovali, da uporabnik vnese ali pa razbere dolocene podatke.</p>
               <p>Na primer, na spletni strani, ki vsebuje prijavo oz. registracijo uporabnikov, bo uporabnik potreboval vpisati svoje uporabnisko ime in geslo (*vnos podatkov*), ter razbrati, ali je vneseno geslo pravilno ali ne. Da bomo lahko sprogramirali tako spletno stran, bomo morali spoznati nekaj nacinov za *interakcijo* z uporabnikom. </p>
-              <p>Za vnos lahko uporabimo <InlineCode executable>prompt("Vnesi karkoli")</InlineCode>, medtem ko imamo za izpis podatkov vec izbire:</p>
+              <p>Za vnos lahko uporabimo <Code executable>prompt("Vnesi karkoli")</Code>, medtem ko imamo za izpis podatkov vec izbire:</p>
               <ul>
-                <li><InlineCode executable>alert("izpiz v modalnem oknu")</InlineCode></li>
-                <li><InlineCode executable>console.log("izpis v konzoli")</InlineCode></li>
-                <li><InlineCode>document.write("izpis v html")</InlineCode></li>
+                <li><Code executable>alert("izpiz v modalnem oknu")</Code></li>
+                <li><Code executable>console.log("izpis v konzoli")</Code></li>
+                <li><Code>document.write("izpis v html")</Code></li>
               </ul>
               <CodeEditor lang="javascript" websitePreview={false} code={basicUserInteraction} height={editorHeight}/>
               <p>Poglejmo si še en (podoben) primer. Tudi tukaj bomo zahtevali od uporabnika vnos nekega podatka - url povezavo do video posnetka. Pridobljeni URL bomo zatem <i>zlepili</i> skupaj z ostalo potrebno html kodo, tako da bo razultat programa html video element, katerega bomo prikazali na našo spletno stran.</p>
-              <blockquote><b>POZOR!</b> Bodi pazljiv kako <i>lepis</i> znakovne nize. Če uporabljas <i>spremenljivko</i>, na primer <InlineCode>let testSpremenljivka = 123;</InlineCode>, ter zelis sestaviti drug znakovni niz, ki vsebuje <i>vrednost</i> spremenljivke, potem ne smes napisati <code>"</code> navednic okoli imena spremenljivke. Primer: Ta koda: <InlineCode executable>let ime = "Janez"; let zlepljenka = "Pozdravljen " + "ime"; alert(zlepljenka);</InlineCode> ne izpise enakega niza, kot ta: <InlineCode executable>let ime = "Janez"; let zlepljenka = "Pozdravljen " + ime; alert(zlepljenka);</InlineCode>!</blockquote>
+              <blockquote><b>POZOR!</b> <br/> Bodi pazljiv kako <i>lepis</i> znakovne nize. Če uporabljas <i>spremenljivko</i>, na primer <Code>let testSpremenljivka = 123;</Code>, ter zelis sestaviti drug znakovni niz, ki vsebuje <i>vrednost</i> spremenljivke, potem ne smes napisati dvojnih navednic (<code>"</code>) okoli imena spremenljivke. <br/><br/> Poglejmo si dva primera. Ta koda: <Code code={`let ime = "Janez";\nlet zlepljenka = "Pozdravljen " + "ime";\nalert(zlepljenka);`} block executable/> ne izpise enakega niza, kot ta: <Code code={`let ime = "Janez";\nlet zlepljenka = "Pozdravljen " + ime;\nalert(zlepljenka);`} block executable/></blockquote>
               <p>Spodaj je primer programa, ki od uporabnika zahteva ime in priimek, ta dva niza zdruzi v en niz *celoIme*, ter ta podatek izpise na vec razlicnih nacinov.</p>
               <CodeEditor lang="javascript" websitePreview={true} code={renderCustomVideo} height={editorHeight}/>
             </div>
