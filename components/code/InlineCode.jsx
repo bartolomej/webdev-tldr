@@ -8,6 +8,7 @@ function InlineCode({ children, onExecute, onError = () => null, executable = fa
 
   function execute() {
     try {
+      console.log(children)
       const result = eval(children);
       if (result && onExecute) {
         onExecute(result)
@@ -35,12 +36,18 @@ function InlineCode({ children, onExecute, onError = () => null, executable = fa
     }
   }
 
+  function onClick() {
+    if (executable) {
+      execute();
+    }
+  }
+
   return (
     <Code
       data-splitbee-event="InlineCode run"
-      data-tip={executable && "Pritisni in izvedi kodo."}
+      data-tip={executable ? "Pritisni in izvedi kodo." : null}
       clickable={executable}
-      onClick={execute}
+      onClick={onClick}
     >
       {children}
     </Code>

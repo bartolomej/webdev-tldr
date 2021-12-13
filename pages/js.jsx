@@ -74,6 +74,21 @@ console.log(celoIme); // izpise v konzolo
 document.write(celoIme); // izpise na html stran
 `
 
+const renderCustomVideo =
+  `let videoUrl = prompt("Vnesi link do videa");
+
+let prviDelHtmlja = "<video width=400 controls><source src=";
+
+let drugiDelHtmlja = " type=video/mp4></video>";
+
+// POZOR!
+let test = "prviDedaHtmlja" + "videoUrl" + "drugiDelHtmlja";
+
+let celotenHtml = prviDelHtmlja + videoUrl + drugiDelHtmlja;
+
+document.write(celotenHtml)
+`
+
 function Css () {
   const CodeEditor = dynamic(() => import("../components/code/CodeEditor"), { ssr: false })
   const editorHeight = "500px"
@@ -139,8 +154,11 @@ function Css () {
                 <li><InlineCode executable>console.log("izpis v konzoli")</InlineCode></li>
                 <li><InlineCode>document.write("izpis v html")</InlineCode></li>
               </ul>
-              <p>Spodaj je primer programa, ki od uporabnika zahteva ime in priimek, ta dva niza zdruzi v en niz *celoIme*, ter ta podatek izpise na vec razlicnih nacinov.</p>
               <CodeEditor lang="javascript" websitePreview={false} code={basicUserInteraction} height={editorHeight}/>
+              <p>Poglejmo si še en (podoben) primer. Tudi tukaj bomo zahtevali od uporabnika vnos nekega podatka - url povezavo do video posnetka. Pridobljeni URL bomo zatem <i>zlepili</i> skupaj z ostalo potrebno html kodo, tako da bo razultat programa html video element, katerega bomo prikazali na našo spletno stran.</p>
+              <blockquote><b>POZOR!</b> Bodi pazljiv kako <i>lepis</i> znakovne nize. Če uporabljas <i>spremenljivko</i>, na primer <InlineCode>let testSpremenljivka = 123;</InlineCode>, ter zelis sestaviti drug znakovni niz, ki vsebuje <i>vrednost</i> spremenljivke, potem ne smes napisati <code>"</code> navednic okoli imena spremenljivke. Primer: Ta koda: <InlineCode executable>let ime = "Janez"; let zlepljenka = "Pozdravljen " + "ime"; alert(zlepljenka);</InlineCode> ne izpise enakega niza, kot ta: <InlineCode executable>let ime = "Janez"; let zlepljenka = "Pozdravljen " + ime; alert(zlepljenka);</InlineCode>!</blockquote>
+              <p>Spodaj je primer programa, ki od uporabnika zahteva ime in priimek, ta dva niza zdruzi v en niz *celoIme*, ter ta podatek izpise na vec razlicnih nacinov.</p>
+              <CodeEditor lang="javascript" websitePreview={true} code={renderCustomVideo} height={editorHeight}/>
             </div>
           </details>
 
