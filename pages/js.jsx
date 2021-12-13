@@ -74,6 +74,36 @@ console.log(celoIme); // izpise v konzolo
 document.write(celoIme); // izpise na html stran
 `
 
+const inputCondition =
+  `let vnos = +prompt("Vnesi stevilo");
+  
+if (vnos > 12) {
+  alert("Vnesel si ustrezno stevilo");  
+}
+`
+
+const conditionalStatements =
+`let stevilo = 12;
+
+let stevec = 0;
+
+if (stevilo > 11) {
+  stevec = stevec + 1;
+}
+
+if (stevilo >= 12) {
+  stevec = stevec + 2;
+}
+
+if (stevilo < 4) {
+  stevec = stevec + 5;
+} else {
+  stevec = stevec + 10;
+}
+
+alert(stevec);
+`
+
 const renderCustomVideo =
   `let videoUrl = prompt("Vnesi link do videa");
 
@@ -162,6 +192,26 @@ function Css () {
             </div>
           </details>
 
+          <h2>Pogojni stavki</h2>
+
+          <details>
+            <summary>
+             Osnovna uporaba pogojnih stavkov
+            </summary>
+            <div>
+              <p>Veliko spletnih aplikacij zahteva spletno prijavo uporabnika, ko uporabnik vnese svoje uporabnisko ime in geslo, aplikacija (oziroma <i>program</i>) preveri ali se vneseno geslo zares ujema s pravim shranjenim geslom. V primeru da se ujema, aplikacija uporabnika preusmeri na njegov osebni profil, v nasprotnem primeru pa mu prikaze sporocilo o napaki.</p>
+              <p>To je samo en izmed mnogih primerov uporabe t.i. <b>pogojnih stavkov</b>.</p>
+              <p>Pogojni stavki nam omogocajo, da delcke kode izvedemo samo v primeru, da dolocen pogoj drzi ali pa ne drzi. Poglejmo si primer pogojnega stavka, ki bo vedno <i>resnicen</i> - koda, ki je zapisana med zavitima oklepajema (<Code>{`{ ... }`}</Code>), se bo vedno izvrsila.</p>
+              <Code executable block code={`if (12 > 11) {\n  alert("To okno se bo vedno prikazalo");\n}`} />
+              <p>Zdaj pa si poglejmo primer pogojnega stavka, ki se nikoli nebo izvedel.</p>
+              <Code executable block code={`if (11 > 12) {\n  alert("To okno se nebo nikoli prikazalo");\n}`} />
+              <p>Spodnji stavek pa se bo izvedel samo v primeru, ko uporabnik vnese stevilo, ki ustreza pogoju <Code>vnos > 12</Code>.</p>
+              <CodeEditor lang="javascript" websitePreview={false} code={inputCondition} height={'150px'}/>
+              <br/>
+              <p>Zdaj pa se uganka. Koliksna je vrednost spremenljivke <Code>stevec</Code> na koncu spodnjega programa ?</p>
+              <CodeEditor lang="javascript" websitePreview={false} code={conditionalStatements} height={editorHeight}/>
+            </div>
+          </details>
         </section>
 
       </Main>
