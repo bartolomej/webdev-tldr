@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from "styled-components";
 import { toast } from "react-hot-toast";
 import { theme } from "../../styles/theme";
+import Sandbox from "./Sandbox";
 
 
 function Code({ block = false, code, children, onExecute, onError = () => null, executable = false }) {
+  const sandboxRef = useRef();
   const value = code || children;
 
   function execute() {
     try {
-      const result = eval(value);
+      const result = sandboxRef.current.eval(value);
       if (result && onExecute) {
         onExecute(result)
       } else if (result) {
@@ -43,15 +45,18 @@ function Code({ block = false, code, children, onExecute, onError = () => null, 
   }
 
   return (
-    <Container
-      data-splitbee-event="Code run"
-      data-tip={executable ? "Pritisni in izvedi kodo." : null}
-      clickable={executable}
-      block={block}
-      onClick={onClick}
-    >
-      {value}
-    </Container>
+    <>
+      <Sandbox hidden ref={el => sandboxRef.current = el} />
+      <Container
+        data-splitbee-event="Code run"
+        data-tip={executable ? "Pritisni in izvedi kodo." : null}
+        clickable={executable}
+        block={block}
+        onClick={onClick}
+      >
+        {value}
+      </Container>
+    </>
   )
 }
 

@@ -133,7 +133,7 @@ function CodeEditor ({
   }
 
   function updateIframeContent () {
-    sandboxRef.current.renderCode(value);
+    sandboxRef.current.execute(value);
   }
 
   const renderFullscreenToggle = () => isFullscreen ? (

@@ -6,17 +6,31 @@ import styled from "styled-components";
 class Sandbox extends React.Component {
 
   shouldComponentUpdate (nextProps, nextState, nextContext) {
-    return false;
+    return true;
   }
 
   componentDidMount () {
     this._listenIframeEvents();
   }
 
-  renderCode(code) {
+  /**
+   * Executes (renders) given html code in a sandbox environment.
+   * @param code {string} - html document
+   */
+  execute(code) {
     const {contentWindow} = this.iframe;
     this.iframe.onload = () => this.writeContent(code);
     contentWindow.location.reload(); // clean JS context (clear declared variables,..)
+  }
+
+  /**
+   * Executes given JavaScript code in a sandbox environment and returns the result.
+   * @param code {string} - js code to execute
+   * @returns {any} - value of the result
+   */
+  eval(code) {
+    const {contentWindow} = this.iframe;
+    return contentWindow.eval(code);
   }
 
   _listenIframeEvents () {
@@ -108,6 +122,8 @@ class Sandbox extends React.Component {
 
   render() {
     const {hidden} = this.props;
+    // must prevent rerender of iframe
+    // https://reactjs.org/docs/integrating-with-other-libraries.html#integrating-with-dom-manipulation-plugins
     return (
       <Iframe hidden={hidden} ref={el => this.iframe = el} />
     )
