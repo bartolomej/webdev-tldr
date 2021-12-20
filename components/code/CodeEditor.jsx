@@ -26,6 +26,7 @@ import "ace-builds/src-noconflict/snippets/javascript"
 // prettier
 import prettier from "prettier/standalone";
 import parserHtml from "prettier/parser-html";
+import Sandbox from "./Sandbox";
 
 
 const prettierOptions = {
@@ -50,14 +51,14 @@ function CodeEditor ({
   const [isFocused, setFocused] = useState(false);
   const [isFullscreen, setFullscreen] = useState(fullscreen);
   const [syntaxError, setSyntaxError] = useState(null);
-  const iframeRef = useRef();
+  const sandboxRef = useRef();
 
   useEffect(() => {
     setValue(code);
   }, [code])
 
   useEffect(() => {
-    if (iframeRef.current && autorun) {
+    if (sandboxRef.current && autorun) {
       updateIframeContent();
     }
     const formatted = formatCode(value);
@@ -78,7 +79,6 @@ function CodeEditor ({
   }, [syntaxError])
 
   useEffect(() => {
-    listenIframeEvents();
     window.addEventListener("keydown", onKeyPress);
     return () => window.removeEventListener("keydown", onKeyPress)
   }, [])
@@ -123,31 +123,6 @@ function CodeEditor ({
     })
   }
 
-  function listenIframeEvents () {
-    window.addEventListener('message', function (response) {
-      // Make sure message is from our iframe, extensions like React dev tools might use the same technique and mess up our logs
-      if (response.data && response.data.source === 'iframe') {
-        const payload = JSON.parse(response.data.message);
-        switch (payload.type) {
-          case "log":
-            return handleLogMessage(payload);
-        }
-      }
-    });
-  }
-
-  function handleLogMessage (payload) {
-    switch (payload.logLevel) {
-      case "warn":
-      case "error":
-      case "info":
-      case "log": {
-        // TODO: handle logs
-        console.log("log: ", payload.arguments)
-      }
-    }
-  }
-
   function onKeyPress (e) {
     if (e.key === "Escape") {
       setFullscreen(false)
@@ -157,67 +132,8 @@ function CodeEditor ({
     }
   }
 
-  function formatContent () {
-    switch (lang) {
-      case "javascript":
-        return `<script>${value}</script>`
-      default:
-        return value;
-    }
-  }
-
-  function internalScripts () {
-    return `
-      <script>
-        // Save the current console log function in case we need it.
-        const overwrites = Object.create({
-          log: console.log,
-          error: console.error,
-          warn: console.warn,
-          info: console.info,
-        });
-
-        function emitMessage(data) {
-          window.parent.postMessage(
-            {
-              source: 'iframe',
-              message: JSON.stringify(data),
-            },
-            '*'
-          );
-        }
-
-        function emitLog(logLevel) {
-          return function (...rest) {
-            // window.parent is the parent frame that made this window
-            emitMessage({
-              type: "log",
-              logLevel,
-              arguments: rest
-            })
-            // Finally applying the console statements to saved instance earlier
-            overwrites[logLevel].apply(console, arguments);
-          };
-        }
-
-        // Override the console
-        console.log = emitLog("log");
-        console.error = emitLog("error");
-        console.warn = emitLog("warn");
-        console.info = emitLog("info");
-      </script>
-    `
-  }
-
   function updateIframeContent () {
-    const iframeDoc = iframeRef.current.contentDocument;
-    const iframeWindow = iframeRef.current.contentWindow;
-    iframeDoc.open();
-    iframeDoc.write(internalScripts());
-    iframeDoc.write(formatContent());
-    iframeDoc.close();
-    // TODO: fix issues with reload() call
-    // iframeWindow.location.reload(); // clean JS context (clear declared variables,..)
+    sandboxRef.current.renderCode(value);
   }
 
   const renderFullscreenToggle = () => isFullscreen ? (
@@ -286,10 +202,10 @@ function CodeEditor ({
         ) : (
           websitePreview ? (
             <PreviewSide>
-              <Iframe ref={iframeRef}/>
+              <Sandbox lang={lang} ref={el => sandboxRef.current = el} />
             </PreviewSide>
           ) : (
-            <IframeHidden ref={iframeRef}/>
+            <Sandbox hidden lang={lang} ref={el => sandboxRef.current = el}/>
           )
         )}
       </Container>
@@ -345,18 +261,6 @@ const PreviewSide = styled.div`
   background: white;
   max-width: 50%;
 `
-
-const Iframe = styled.iframe`
-  height: 100%;
-  width: 100%;
-  overflow: scroll;
-  border: none;
-  background: white;
-`
-
-const IframeHidden = styled.iframe`
-  display: none;
-`;
 
 const SyntaxErrorWrapper = styled.div`
   padding: 5px;
