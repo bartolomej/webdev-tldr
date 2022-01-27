@@ -2,7 +2,7 @@
 
 # WebDev TLDR;
 
-Educational website + interactive slides with short, explanatory & interactive programming guides. 
+[Educational website](https://webdev-tldr.vercel.app/) + [interactive slides](https://webdev-tldr-slides.vercel.app/) with short, explanatory & interactive programming guides. 
 
 Made with [React.js](https://reactjs.org/) (UI framework), [Next.js](https://nextjs.org/) (React.js framework for Server Side Rendering) and [sli.dev](https://sli.dev) (Presentation Slides for Developers).
 
