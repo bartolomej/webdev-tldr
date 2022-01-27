@@ -2,9 +2,9 @@
 
 # WebDev TLDR;
 
-An educational website with short, explanatory & interactive code examples. 
+Educational website + interactive slides with short, explanatory & interactive programming guides. 
 
-Made with [React.js](https://reactjs.org/) (UI framework) and [Next.js](https://nextjs.org/) (React.js framework for Server Side Rendering).
+Made with [React.js](https://reactjs.org/) (UI framework), [Next.js](https://nextjs.org/) (React.js framework for Server Side Rendering) and [sli.dev](https://sli.dev) (Presentation Slides for Developers).
 
 ## Setup
 
@@ -13,8 +13,9 @@ To run this all locally, you need to have Node.js installed on your machine.
 1. Install [Node.js](https://nodejs.org/en/)
 2. Install [Yarn](https://classic.yarnpkg.com/en/docs/install/) (optional)
 3. Clone this repo `git clone https://github.com/bartolomej/webdev-tldr && cd webdev-tldr`
-4. Install dependencies `yarn install` or `npm i`
-5. Run the app in development mode `yarn run dev` or `npm run dev`
+4. Install dependencies `yarn install && cd slides && yarn install`
+5. Run the website app in development `yarn run dev`
+6. Run slides app in development `cd slides && yarn run dev`
 
 ## Contribute
 
