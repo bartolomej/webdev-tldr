@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import styled from "styled-components";
 import { toast } from "react-hot-toast";
-import { theme } from "../../styles/theme";
-import Sandbox from "./Sandbox";
+import { theme } from "../styles/theme";
+import {Sandbox} from "react-web-coder";
 
 
 function Code({ block = false, code, children, onExecute, onError = () => null, executable = false }) {

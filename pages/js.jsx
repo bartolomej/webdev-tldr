@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import { theme } from "../styles/theme";
 import { IoPlayOutline } from "react-icons/io5";
-import Code from "../components/code/Code";
+import Code from "../components/Code";
 
 const whereToWriteJs =
   `<!DOCTYPE html>
@@ -120,7 +120,7 @@ document.write(celotenHtml)
 `
 
 function Css () {
-  const CodeEditor = dynamic(() => import("../components/code/CodeEditor"), { ssr: false })
+  const CodeEditor = dynamic(() => import("../components/CodeEditor"), { ssr: false })
   const editorHeight = "500px"
 
   return (
