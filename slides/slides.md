@@ -164,11 +164,49 @@ if (ime === "Nina") {
 
 ---
 
+# Zanke
 
-Users could edit and preview render result in sli.dev
+Poleg _pogojnega izvajanja_ določenih vrstic, bomo velikokrat želeli tudi _ponoviti izvajanje_ določenih vrstic. To bomo dosegli s pomočjo [**zank**](https://www.w3schools.com/js/js_loop_while.asp).
 
+Poznamo več vrst zank, kot so `for`, `while` in `do while` zanke, ki se med seboj malenkostno razlikujejo v uporabi. 
 
-
-```html {preview}
-<h1>Hello</h1>
+Za nas bo dovolj znanje `while` zanke, primer take zanke je v spodnji kodi.
+```js
+let steviloPonovitev = 3;
+let stevec = 0;
+while (stevec < steviloPonovitev) {
+  console.log("stevec: " + stevec);
+  stevec = stevec + 1;
+}
 ```
+Zgornji program bi lahko napisali tudi z uporabo `for` zanke. Primer je viden spodaj.
+```js
+let steviloPonovitev = 3;
+for (let stevec = 0; stevec < steviloPonovitev; stevec++) {
+  console.log("stevec: " + stevec);
+}
+```
+
+Izpis zgornjih programov:
+```
+stevec: 0
+stevec: 1
+stevec: 2
+```
+
+
+---
+
+
+# Interakcija s HTML
+
+Ko smo programirali strani z uporabo HTML jezika, smo ugotovili, da samo z uporabo HTML-ja ne moremo razviti _dinamične strani_. Z uporabo CSS-ja ali JavaScript-a, pa lahko dosežemo točno to.
+
+Tukaj si bomo pogledali, kako lahko iscemo HTML elemente z JavaScript-om. Uporabne funkcije za iskanje so:
+- `getElemenentById` - poisce tocno dolocen element z podanim ID-jem
+- `getElementsByClassName` - poisce en ali vec elementov z podanim razredom 
+- `querySelector` 
+- `querySelectorAll`.
+
+
+
