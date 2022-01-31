@@ -1,7 +1,7 @@
 ---
 # try also 'default' to start simple
 theme: seriph
-background: https://cs.ucsb.edu/sites/default/files/2021-06/source-4280758_1920.jpg
+background: https://images.unsplash.com/photo-1593720213428-28a5b9e94613?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80&blur=30
 # apply any windi css classes to the current slide
 class: 'text-center'
 # https://sli.dev/custom/highlighters.html
@@ -19,7 +19,9 @@ drawings:
   persist: false
 ---
 
-# <carbon-code /> JavaScript (za začetnike)
+# <carbon-code /> JavaScript
+
+Tečaj za začetnike.
 
 
 <div class="abs-br m-6 flex gap-2">
@@ -32,7 +34,6 @@ drawings:
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
 -->
-
 ---
 
 # Kaj je JavaScript ?
@@ -158,4 +159,16 @@ if (ime === "Nina") {
 } else {
   alert("Ta oseba ni moj sosolec ali sosolka.")
 }
+```
+
+
+---
+
+
+Users could edit and preview render result in sli.dev
+
+
+
+```html {preview}
+<h1>Hello</h1>
 ```
