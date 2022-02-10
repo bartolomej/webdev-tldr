@@ -182,7 +182,7 @@ while (stevec < steviloPonovitev) {
 Zgornji program bi lahko napisali tudi z uporabo `for` zanke. Primer je viden spodaj.
 ```js
 let steviloPonovitev = 3;
-for (let stevec = 0; stevec < steviloPonovitev; stevec++) {
+for (let stevec = 0; stevec < steviloPonovitev; stevec++) { // namesto stevec = stevec + 1 lahko pisemo tudi stevec++
   console.log("stevec: " + stevec);
 }
 ```
@@ -203,10 +203,23 @@ stevec: 2
 Ko smo programirali strani z uporabo HTML jezika, smo ugotovili, da samo z uporabo HTML-ja ne moremo razviti _dinamične strani_. Z uporabo CSS-ja ali JavaScript-a, pa lahko dosežemo točno to.
 
 Tukaj si bomo pogledali, kako lahko iscemo HTML elemente z JavaScript-om. Uporabne funkcije za iskanje so:
-- `getElemenentById` - poisce tocno dolocen element z podanim ID-jem
-- `getElementsByClassName` - poisce en ali vec elementov z podanim razredom 
-- `querySelector` 
-- `querySelectorAll`.
+- `getElemenentById(id)` - poisce tocno dolocen element z podanim ID-jem
+- `getElementsByClassName(razred)` - poisce en ali vec elementov z podanim razredom 
+- `querySelector(cssSelektor)`  - poisce prvi element, ki ustreza podanemu [css selektorju](https://www.w3schools.com/cssref/css_selectors.asp)
+- `querySelectorAll(cssSelektor)` - poisce vse elemente, ki ustrezajo podanemu [css selektorju](https://www.w3schools.com/cssref/css_selectors.asp)
 
+Poglejmo si nekaj primerov uporabe:
+```html
+<h1 id="unikat">Naslov 1</h1>
+<h1 class="razred">Naslov 2</h1>
+<script>
+  document.getElementById("unikat"); // vrne prvi h1 element
+  document.getElementsByClassName("razred") // vrne drugi h1 element
+  document.querySelector("h1") // vrne prvi h1 element
+  document.querySelectorAll("h1") // vrne seznam vseh h1 elementov na strani
+</script>
+```
+
+---
 
 
