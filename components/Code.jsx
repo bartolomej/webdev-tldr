@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import styled from "styled-components";
 import { toast } from "react-hot-toast";
 import { theme } from "../styles/theme";
-import {Sandbox} from "react-web-coder";
+import {Sandbox} from "react-codefull";
 
 
 function Code({ block = false, code, children, onExecute, onError = () => null, executable = false }) {
