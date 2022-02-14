@@ -222,4 +222,45 @@ Poglejmo si nekaj primerov uporabe:
 
 ---
 
+# Dogodki
 
+Dogodki so nam (programerjem) zanimive akcije, ki se zgodijo v brskalniku. Dogodek lahko sproži uporabnik (npr. klik na html element) ali pa nekatere funkcionalnosti brskalnika, ki se izvajajo v ozadju (npr. brskalnik ni vec povezan v internet, stran se je naložila, ...).
+
+
+Ce bomo hoteli, da se del nase kode (npr. funkcija) izvede tocno takrat, ko se zgodi nek dogodek, bomo morali ta dogodek _prestrezti_. To lahko naredimo na nekaj nacinov.
+
+Nekaj najbolj znanih in uporabnik dogodkov, katere lahko prestrežemo iz html elementov so:
+- [`click`](https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event) - pritisk miske (oz. dotik s prstom na mobilnih napravah)
+- [`mouseover`](https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseover_event) - uporabnik je sel z misko cez nas element
+- [`scroll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/scroll_event) - uporabnik je "scrollal" z misko po nasem elementu
+- [`keydown`](https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event) - uporabnik je pritisnil tipko
+
+Celoten seznam najdete tukaj: https://developer.mozilla.org/en-US/docs/Web/Events#event_listing
+
+---
+
+1. **Dodamo poslušalca na atribut elementa z uporabo HTML-ja**
+```html
+<button onclick="poslusaj">Klikni me!</button>
+<script>
+  function poslusaj(e) {
+    console.log("Dogodek (pritisk tipke) se je zgodil!")
+  }
+</script>
+```
+2. **Dodamo poslušalca na element z uporabo JS**
+```html
+<button id="mojaTipka">Klikni me!</button>
+<script>
+  let tipka = document.getElementById("mojaTipka");
+  
+  // spodnji dve vrstici kode sta isti
+  // uporabite lahko katerega koli izmed spodnjih dveh načinov
+  tipka.addEventListener("click", poslusaj);
+  tipka.onclick = poslusaj;
+  
+  function poslusaj(e) {
+    console.log("Dogodek (pritisk tipke) se je zgodil!")
+  }
+</script>
+```

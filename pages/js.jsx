@@ -104,6 +104,43 @@ if (stevilo < 4) {
 alert(stevec);
 `
 
+const eventListeningDemo1 =
+`<button onclick="poslusaj()">Klikni me!</button>
+<script>
+  function poslusaj(e) {
+    alert("Dogodek (pritisk tipke) se je zgodil! ")
+  }
+</script>
+`
+
+const eventListeningDemo2 =
+  `<button id="mojaTipka">Klikni me!</button>
+<script>
+  let tipka = document.getElementById("mojaTipka");
+  
+  // spodnji dve vrstici kode sta isti
+  // uporabite lahko katerega koli izmed spodnjih dveh načinov
+  tipka.addEventListener("click", poslusaj);
+  tipka.onclick = poslusaj;
+  
+  function poslusaj(e) {
+    // e.type izpise, za kateri dogodek gre
+    alert("Dogodek " + e.type + " (pritisk tipke) se je zgodil! ")
+  }
+</script>
+`
+
+const keyPressEventDemo =
+`<script>
+  document.addEventListener("keydown", poslusaj);
+  
+  function poslusaj(e) {
+    // e.type izpise, za kateri dogodek gre
+    alert("Zgodil se je dogodek " + e.type + ", pritisnil si tipko " + e.key)
+  }
+</script>
+`
+
 const renderCustomVideo =
   `let videoUrl = prompt("Vnesi link do videa");
 
@@ -212,7 +249,30 @@ function Css () {
               <CodeEditor lang="javascript" websitePreview={false} code={conditionalStatements} height={editorHeight}/>
             </div>
           </details>
-        </section>
+
+          <h2>Dogodki</h2>
+
+          <details>
+            <summary>
+              Kako poslušamo na dogodke
+            </summary>
+            <div>
+              <p>Na dogodke lahko poslušamo, tako da dodamo elementu html atribut z "poslušalno funkcijo".</p>
+              <CodeEditor lang="html" websitePreview={true} autorun code={eventListeningDemo1} height="150px" />
+              <p>Ali pa poiščemo element v JavaScript-u in sele zatem dodamo "poslušalno funkcijo".</p>
+              <CodeEditor lang="html" websitePreview={true} autorun code={eventListeningDemo2} height="300px"/>
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              Uporaba "keydown" dogodka (tipkovnica)
+            </summary>
+            <div>
+              <CodeEditor lang="html" websitePreview={true} autorun code={keyPressEventDemo} height={editorHeight}/>
+            </div>
+          </details>
+      </section>
 
       </Main>
     </Fragment>
