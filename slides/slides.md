@@ -264,3 +264,16 @@ Celoten seznam najdete tukaj: https://developer.mozilla.org/en-US/docs/Web/Event
   }
 </script>
 ```
+
+--- 
+
+# Projekt: Aim Lab igra
+
+Cilj tega projekta je izdelava prve igre z uporabo JS, HTML & CSS znanja.
+
+Osnovna ideja: na zaslonu se na naključnih mestih izrisuje krog (ali katerikoli drug 2D lik), katerega mora uporabnik klikniti z miško. To idejo lahko poljubno razširite ali pa spremenite. Lahko uporabite različne pristope, kot so:
+- uporabnik mora čim prej klikniti krogec – štejemo najboljši cas "zadetka"
+- uporabnik mora čim večkrat klikniti krogec v določenem časovnem odboju – štejemo število klikov
+- ...
+
+Primer te igre se nahaja tukaj: https://codepen.io/bartolomej/pen/GROMpXd
