@@ -277,3 +277,26 @@ Osnovna ideja: na zaslonu se na naključnih mestih izrisuje krog (ali katerikoli
 - ...
 
 Primer te igre se nahaja tukaj: https://codepen.io/bartolomej/pen/GROMpXd
+
+---
+
+# Pridobivanje podatkov iz interneta
+
+Spodnja slika prikazuje potek komunikacije med računalniki na internetu. 
+
+<img src="https://darvishdarab.github.io/cs421_f20/assets/images/client-server-1-d85a93ea16590c10bed340dd78294d0d.png" width="200" />
+
+Preko JavaScript-a bomo z nasim računalnikom poslali _zahtevo_ (angl. request) nekemu oddaljenemu strežniku, ki hrani zelene podatke. Ta strežnik nam bo odgovoril z _odzivom_ (angl. response), ki bo vseboval zelene podatke.
+
+```js
+fetch("https://soundverse.netlify.app/.netlify/functions/search?q=eminem")
+  .then(odziv => odziv.json()) // pretvorba podatkov v JavaScript-u prijazno obliko
+  .then(podatki => console.log(podatki)) // tukaj imamo ze zahtevane podatke
+  .catch(napaka => console.error(napaka)) // ta vrsstica se izvede v primeru napake
+```
+
+Primer uporabe deezerjevih podatkov: https://codepen.io/bartolomej/pen/rNYbYYG?editors=1010
+
+Storitev za pridobivanje podatkov o glasbi: https://developers.deezer.com/api
+
+Seznam brezplačnih API-jev: https://github.com/public-apis/public-apis
