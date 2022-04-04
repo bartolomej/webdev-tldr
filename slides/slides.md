@@ -300,3 +300,60 @@ Primer uporabe deezerjevih podatkov: https://codepen.io/bartolomej/pen/rNYbYYG?e
 Storitev za pridobivanje podatkov o glasbi: https://developers.deezer.com/api
 
 Seznam brezplačnih API-jev: https://github.com/public-apis/public-apis
+
+---
+
+# Canvas
+
+Do zdaj smo spoznali, kako z JavaScript-om "rišemo" na zaslon samo z uporabo HTML-ja.
+
+<img style="height: 20vh; border-radius: 20px" src="https://lenadesign.org/wp-content/uploads/2020/01/canvas.jpg" />
+
+Največkrat je HTML res najbolj primeren način. Na primer, za prikaz besedila, izdelavo vnosnih form, itd.
+
+Ta način pa nas v nekaterih primerih tudi omejuje. Predstavljajmo si, da želimo izdelati igro, kjer ponavadi želimo postavljati elemente na točno določena mesta v 2D ali pa celo 3D prostoru. Poleg tega pa bi želeli risati še razne krivulje, trikotnike in razne druge oblike.
+
+V primerih, ko nam samo HTML ne zadošča za izdelavo našega uporabniškega vmesnika lahko uporabimo [HTML Canvas](https://www.w3schools.com/html/html5_canvas.asp).
+
+---
+
+# Osnove Canvas-a
+
+Canvas je HTML element, katerega dodamo v HTML kodo naše strani. Vso risanje pa opravimo z JavaScript-om.
+
+```html
+<body> <canvas id="moj-canvas"></canvas> </body>
+<script> let mojCanvas = document.getElementById("moj-canvas"); </script>
+```
+
+```js
+// pridobimo "kontekst" za risanje
+let ctx = mojCanvas.getContext();
+
+// premaknemo se na zacetno tocno x=0, y=0
+ctx.moveTo(0, 0);
+// narišemo crto iz zacetne točke x=0, y=0 v končno točko x=100, y=200
+ctx.lineTo(100, 200);
+
+// pobarvamo
+ctx.stroke();
+```
+
+Primer: https://codepen.io/bartolomej/pen/vYppRpd
+
+Kako risati: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
+
+---
+
+# Več o Canvas-u
+
+<img style="width: 200px; border-radius: 10px; display: inline;" src="https://bartolomej.site/static/1306db9b40a99e5311027cf7507ec73a/5707d/2020-01.png" />
+<img style="width: 200px; border-radius: 10px; display: inline; margin-left: 10px;" src="https://bartolomej.site/static/7d9d022fb778eff2820dca047afbc427/5707d/2020-03.png" />
+<img style="width: 200px; border-radius: 10px; display: inline; margin-left: 10px;" src="https://bartolomej.site/static/51abf126510382aa1095957e7487256e/5707d/2020-02.png" />
+
+Zanimivi programi: https://project-awesome.org/raphamorim/awesome-canvas#examples
+
+Več dokumentacije najdete na:
+- https://www.w3schools.com/html/html5_canvas.asp
+- https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial
+- https://flaviocopes.com/canvas
