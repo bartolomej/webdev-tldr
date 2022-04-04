@@ -322,11 +322,10 @@ V primerih, ko nam samo HTML ne zadošča za izdelavo našega uporabniškega vme
 Canvas je HTML element, katerega dodamo v HTML kodo naše strani. Vso risanje pa opravimo z JavaScript-om.
 
 ```html
-<body> <canvas id="moj-canvas"></canvas> </body>
-<script> let mojCanvas = document.getElementById("moj-canvas"); </script>
-```
-
-```js
+<canvas id="moj-canvas"></canvas>
+<script>
+// poiščemo html canvas
+let mojCanvas = document.getElementById("moj-canvas");
 // pridobimo "kontekst" za risanje
 let ctx = mojCanvas.getContext();
 
@@ -337,6 +336,7 @@ ctx.lineTo(100, 200);
 
 // pobarvamo
 ctx.stroke();
+</script>
 ```
 
 Primer: https://codepen.io/bartolomej/pen/vYppRpd
